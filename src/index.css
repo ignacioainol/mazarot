@@ -29,6 +29,7 @@ span.flag img {
 
 .space-between-item {
   color: gray;
+  font-size: .8em;
 }
 
 .space-between-item:first-child {

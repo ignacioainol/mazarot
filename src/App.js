@@ -1,5 +1,5 @@
 
-import { Col, Container, Form, Row } from 'react-bootstrap';
+import { Col, Container, Form, Nav, NavDropdown, Navbar, Row } from 'react-bootstrap';
 import './App.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { HomeScreen } from './screens/HomeScreen';
@@ -26,7 +26,39 @@ function App() {
               </Col>
             </Row>
           </Container>
+          <Navbar expand="lg" className=" bg-white">
+            <Container>
+              <Navbar.Brand href="#home">
+                <img
+                  src="/assets/images/logo-mazarot.png"
+                  height="100"
+                  className="d-inline-block align-top animate__animated animate__bounceInLeft"
+                  alt="Mazarot logo"
+                />
+              </Navbar.Brand>
 
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="me-auto w-100 justify-content-end">
+                  <Nav.Link href="#home">Inicio</Nav.Link>
+                  <Nav.Link href="#link">Lubricantes</Nav.Link>
+                  <Nav.Link href="#link">Servicios</Nav.Link>
+                  <Nav.Link href="#link">Contactos</Nav.Link>
+                  {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                    <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                    <NavDropdown.Item href="#action/3.2">
+                      Another action
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item href="#action/3.4">
+                      Separated link
+                    </NavDropdown.Item>
+                  </NavDropdown> */}
+                </Nav>
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
         </header>
         <main>
           <Container className="mt-3">
