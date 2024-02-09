@@ -13,5 +13,26 @@ code {
 }
 
 header {
-  border-bottom: 1px solid #0f0f0f;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 2em;
+}
+
+span.flag img {
+  width: 1.8em;
+  margin: 0 1em;
+}
+
+#custom-switch {
+  width: 3em;
+  height: 1.3em;
+}
+
+.space-between-item {
+  color: gray;
+}
+
+.space-between-item:first-child {
+  margin: 0 0.8em;
+  border-right: 1px solid gray;
+  padding-right: 1em;
 }
