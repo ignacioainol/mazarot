@@ -5,8 +5,19 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { HomeScreen } from './screens/HomeScreen';
 import { ChangeLanguaje } from './components/ChangeLanguaje';
 import { EnvelopeAt } from 'react-bootstrap-icons';
+import { useEffect, useState } from "react";
+import { Loading } from './components/Loading';
+
+
 
 function App() {
+  const [loading, setLoading] = useState(true)
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 1600)
+  }, [])
+  if (loading) {
+    return <Loading />
+  }
   return (
     <BrowserRouter>
       <div className="d-flex flex-column site-container">
