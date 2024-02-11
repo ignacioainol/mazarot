@@ -30,3 +30,36 @@
 .fade-out {
     animation: fade 1.7s ease;
 }
+
+/* @media screen and (max-width: 40px) {
+    #loading-logo-mazarot {
+        width: 100% !important;
+        height: 17vh !important;
+    }
+} */
+
+/* Tamaño tablet horizontal (1024-768) */
+@media all and (min-width: 768px) and (max-width: 1024px) {}
+
+/* Tamaño tablet (768-480) */
+@media all and (min-width: 480px) and (max-width: 768px) {}
+
+/* Tamaño teléfonos (480-menos ) */
+@media all and (max-width: 480px) {
+    #loading-logo-mazarot {
+        width: 100% !important;
+        height: 19vh !important;
+    }
+}
+
+/*  Orientación: Vertical */
+@media screen and (orientation:portrait) {}
+
+/* Orientación: Horizontal  */
+@media screen and (orientation:landscape) {}
+
+/* iPhone - Orientación: Vertical */
+@media screen and (max-device-width: 480px) and (orientation:portrait) {}
+
+/* iPhone - Orientación: Horizontal  */
+@media screen and (max-device-width: 480px) and (orientation:landscape) {}
