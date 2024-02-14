@@ -1,0 +1,21 @@
+.itemContainer {
+    background-color: #131312;
+    display: grid;
+    align-items: center;
+    text-align: center;
+    height: 400px;
+    font-size: 2.4em;
+    color: azure;
+}
+
+.itemContainer p {
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+@media only screen and (max-width: 765px) {
+    .itemContainer {
+        font-size: 1.3em;
+        height: 300px;
+    }
+}

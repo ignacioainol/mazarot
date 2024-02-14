@@ -31,18 +31,21 @@
     animation: fade 1.7s ease;
 }
 
-/* @media screen and (max-width: 40px) {
+/* Tamaño tablet horizontal (1024-768) */
+@media all and (min-width: 768px) and (max-width: 1024px) {
     #loading-logo-mazarot {
         width: 100% !important;
-        height: 17vh !important;
+        height: 16em !important;
     }
-} */
-
-/* Tamaño tablet horizontal (1024-768) */
-@media all and (min-width: 768px) and (max-width: 1024px) {}
+}
 
 /* Tamaño tablet (768-480) */
-@media all and (min-width: 480px) and (max-width: 768px) {}
+@media all and (min-width: 480px) and (max-width: 768px) {
+    #loading-logo-mazarot {
+        width: 100% !important;
+        height: 12em !important;
+    }
+}
 
 /* Tamaño teléfonos (480-menos ) */
 @media all and (max-width: 480px) {
