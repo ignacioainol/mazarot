@@ -28,6 +28,14 @@
     transition: all .1s linear;
 }
 
+.itemsNavbar a:hover,
+.itemsNavbar a:active,
+.itemsNavbar a:focus {
+    color: azure;
+    text-decoration: none;
+    /* Asegura que no haya subrayado en los enlaces */
+}
+
 .itemsNavbar a:hover {
     color: azure;
     transform: scale(1.1);
