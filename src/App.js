@@ -1,10 +1,10 @@
 
-import { Col, Container, Form, Nav, NavDropdown, Navbar, Row } from 'react-bootstrap';
+import { Col, Container, Form, Nav, Navbar, Row } from 'react-bootstrap';
 import './App.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { HomeScreen } from './screens/HomeScreen';
 import { ChangeLanguaje } from './components/ChangeLanguaje';
-import { EnvelopeAt } from 'react-bootstrap-icons';
+import { EnvelopeAt, House, GlobeAmericas, EnvelopePaper, Fire } from 'react-bootstrap-icons';
 import { useEffect, useState } from "react";
 import { Loading } from './components/Loading';
 import { Luubricants } from './screens/Luubricants';
@@ -56,10 +56,12 @@ function App() {
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto w-100 justify-content-end">
-                  <Link className="nav-link" to='/'>Inicio</Link>
-                  <Link className="nav-link" to='/lubricants'>Lubricantes</Link>
-                  <Link className="nav-link" to='/services'>Servicios</Link>
-                  <Link className="nav-link" to='/contact'>Contacto</Link>
+                  <div className='itemsNavbar'>
+                    <Link className="nav-link" to='/'><House /> Inicio</Link>
+                    <Link className="nav-link" to='/lubricants'><GlobeAmericas /> Lubricantes</Link>
+                    <Link className="nav-link" to='/services'><Fire /> Servicios</Link>
+                    <Link className="nav-link" to='/contact'><EnvelopePaper /> Contacto</Link>
+                  </div>
                 </Nav>
               </Navbar.Collapse>
             </Container>

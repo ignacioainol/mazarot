@@ -13,9 +13,111 @@
     margin: 0 auto;
 }
 
+.itemsNavbar {
+    width: 55%;
+    /* justify-content: flex-end !important; */
+    flex-direction: row;
+    display: flex;
+    background: #131312;
+    justify-content: space-between;
+    -webkit-transform: skew(-20deg);
+}
+
+.itemsNavbar a {
+    color: azure;
+    transition: all .1s linear;
+}
+
+.itemsNavbar a:hover {
+    color: azure;
+    transform: scale(1.1);
+}
+
+.itemsNavbar>*:first-child {
+    margin-left: 2em;
+    /* Mayor margen en el lado derecho del primer elemento */
+}
+
+.itemsNavbar>*:last-child {
+    margin-right: 2em;
+    /* Mayor margen en el lado izquierdo del último elemento */
+}
+
+.itemsNavbar>*:not(:first-child):not(:last-child) {
+    margin-right: 1em;
+    /* Espaciado estándar entre los elementos internos */
+}
+
 @media only screen and (max-width: 765px) {
     .itemContainer {
         font-size: 1.3em;
         height: 300px;
+    }
+}
+
+@media only screen and (max-width: 765px) {
+    .itemContainer {
+        font-size: 1.3em;
+        height: 300px;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+    .itemsNavbar {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 1201px) and (max-width: 1300px) {
+    .itemsNavbar {
+        width: 80%;
+    }
+}
+
+/* @media screen and (max-width: 991px) {
+    .itemsNavbar {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        -webkit-transform: skew(0deg);
+    }
+
+    .itemsNavbar>* {
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .itemsNavbar>*:first-child {
+        margin: 0;
+    }
+} */
+@media screen and (max-width: 991px) {
+    .itemsNavbar {
+        flex-direction: column;
+        /* Cambiar a disposición de columna */
+        align-items: flex-start;
+
+        justify-content: center;
+        width: auto;
+        -webkit-transform: skew(0deg);
+    }
+
+    .itemsNavbar>*:first-child {
+        margin-left: 4em;
+    }
+
+    .itemsNavbar>* {
+        padding-left: 4em;
+        border-bottom: 1px solid white;
+        width: 100%;
+    }
+
+    .itemsNavbar>*:first-child {
+        margin-left: 0;
+    }
+
+    .itemsNavbar>*:last-child {
+        border-bottom: none;
     }
 }
