@@ -10,6 +10,7 @@ import { Loading } from './components/Loading';
 import { Luubricants } from './screens/Luubricants';
 import { Services } from './screens/Services';
 import { Contact } from './screens/Contact';
+import { Footer } from './components/Footer';
 
 
 
@@ -79,6 +80,7 @@ function App() {
             </Routes>
           </Container>
         </main>
+        <Footer />
       </div>
     </BrowserRouter>
   );

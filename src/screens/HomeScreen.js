@@ -21,7 +21,14 @@ export const HomeScreen = () => {
             <div className='divisor'></div>
 
             <div className="considerations">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis dolor neque esse. Laborum minima culpa aperiam magni mollitia rem, nesciunt libero inventore praesentium magnam dolorum perferendis repudiandae repellendus explicabo earum.
+                <h5>Consideraciones</h5>
+                <p>
+                    Es evidente que los productos químicos son fundamentales para el desarrollo de las actividades industriales. Actualmente existe una amplia gama de productos especializados, que además de destacar sus propiedades técnicas, destacan su alta toxicidad para el ser humano y los organismos vivos.
+                </p>
+                <p>
+                    Es responsabilidad de las áreas de suministro, mantenimiento, seguridad y medio ambiente mantener y entregar, a cada persona que participa en la cadena de almacenamiento y uso de los productos, la información sobre el correcto almacenamiento y manejo seguro de los mismos.
+                </p>
+                <p>Lo anterior, con el fin de optimizar el desempeño de los equipos, en sus condiciones de operación y cargas de trabajo, y cuidar la seguridad de las personas, los equipos y el ambiente en el que se desarrolla el proceso productivo.</p>
             </div>
         </>
     )

@@ -1,0 +1,25 @@
+footer {
+    margin-top: 2em;
+}
+
+.firstFooter {
+    width: 100%;
+    background: linear-gradient(to right, #9e2114, #131312);
+    height: 3em;
+    background-size: 200% 200%;
+    animation: moveBackground 10s infinite;
+}
+
+.secondFooter {
+    width: 100%;
+    background: linear-gradient(to right, #131312, #272626);
+    height: 3em;
+    background-size: 200% 200%;
+    animation: moveBackground 10s infinite;
+}
+
+.logo-small {
+    display: flex;
+    justify-content: end;
+    margin: 2em 4em;
+}
