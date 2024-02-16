@@ -11,6 +11,7 @@ import { Luubricants } from './screens/Luubricants';
 import { Services } from './screens/Services';
 import { Contact } from './screens/Contact';
 import { Footer } from './components/Footer';
+import { Tribologia } from './screens/Tribologia';
 
 
 
@@ -75,6 +76,7 @@ function App() {
                 <Route path="/lubricants" element={<Luubricants />}></Route>
                 <Route path="/services" element={<Services />}></Route>
                 <Route path="/contact" element={<Contact />}></Route>
+                <Route path="/encuesta/tribologia" element={<Tribologia />}></Route>
                 <Route path="/" element={<HomeScreen />}></Route>
               </Route>
             </Routes>

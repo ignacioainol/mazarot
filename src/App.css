@@ -50,9 +50,20 @@
   width: 100%;
   height: 3em;
   margin: 2em 0;
+  color: azure;
   background: linear-gradient(to right, #131312, #9e2114);
   background-size: 200% 200%;
   animation: moveBackground 10s infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divisor p {
+  font-size: 1.3em;
+  text-align: center;
+  margin-top: unset;
+  margin-bottom: unset;
 }
 
 .considerations h5 {
