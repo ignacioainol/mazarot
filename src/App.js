@@ -12,6 +12,7 @@ import { Services } from './screens/Services';
 import { Contact } from './screens/Contact';
 import { Footer } from './components/Footer';
 import { Tribologia } from './screens/Tribologia';
+import { NotaVenta } from './screens/NotaVenta';
 
 
 
@@ -77,6 +78,7 @@ function App() {
                 <Route path="/services" element={<Services />}></Route>
                 <Route path="/contact" element={<Contact />}></Route>
                 <Route path="/encuesta/tribologia" element={<Tribologia />}></Route>
+                <Route path="/nota-venta" element={<NotaVenta />}></Route>
                 <Route path="/" element={<HomeScreen />}></Route>
               </Route>
             </Routes>
