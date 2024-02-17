@@ -18,16 +18,30 @@ export const Contact = () => {
                     <Form.Control type="text" placeholder="Teléfono" />
                 </Form.Group>
 
-                <Form.Group className="mb-3 animate__animated animate__bounceInRight" controlId="formBasicPassword">
+                <Form.Group className="mb-3 animate__animated animate__bounceInLeft" controlId="formBasicPassword">
                     <Form.Label>Email</Form.Label>
                     <Form.Control type="email" placeholder="Ingrese su Email" />
                 </Form.Group>
-                {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group> */}
+
+                <Form.Group className="mb-3 animate__animated animate__bounceInRight">
+                    <Form.Label>Área</Form.Label>
+                    <Form.Select aria-label="Default select example">
+                        <option>Comercial</option>
+                        <option>Técnica</option>
+                        <option>Administración</option>
+                    </Form.Select>
+                </Form.Group>
+
+                <Form.Group className="mb-3 animate__animated animate__bounceInLeft">
+                    <Form.Label>Tipo de Solicitud</Form.Label>
+                    <Form.Select aria-label="Default select example">
+                        <option>Consulta</option>
+                        <option>Ejecutivo</option>
+                    </Form.Select>
+                </Form.Group>
 
                 <Button variant="primary" type="submit">
-                    Submit
+                    Enviar
                 </Button>
             </Form>
         </>

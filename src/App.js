@@ -61,7 +61,7 @@ function App() {
                   <div className='itemsNavbar'>
                     <Link className="nav-link" to='/'><House /> Inicio</Link>
                     <Link className="nav-link" to='/lubricants'><GlobeAmericas /> Lubricantes</Link>
-                    <Link className="nav-link" to='/services'><Fire /> Servicios</Link>
+                    <Link className="nav-link" to='/'><Fire /> Servicios</Link>
                     <Link className="nav-link" to='/contact'><EnvelopePaper /> Contacto</Link>
                   </div>
                 </Nav>
