@@ -11,6 +11,7 @@ export const NotaVenta = () => {
   const [selectedProductsList, setSelectedProductsList] = useState([]);
   const [qty, setQty] = useState('');
   const [subTotal, setSubTotal] = useState(0);
+  const [valueDiscount, setValueDiscount] = useState(0);
 
   const [selectedProduct, setSelectedProduct] = useState('unselected');
 
@@ -27,28 +28,36 @@ export const NotaVenta = () => {
   };
 
   const handleSelectProductChange = (e) => {
-    const selectedPrice =
-      e.target.options[e.target.selectedIndex].getAttribute('data-price');
+    const selectedPrice = e.target.options[e.target.selectedIndex].getAttribute('data-price');
     setPrice(selectedPrice);
+    setQty(1);
+    setSubTotal(selectedPrice);
     setSelectedProduct(e.target.value);
     console.log(qty === '' ? true : false);
     setIsDisabled(e.target.value === 'unselected' ? true : false);
   };
 
+  const handleSetDiscount = (e) => {
+    let inputValue = e.target.value;
+    inputValue = inputValue.replace(/\D/g, '');
+    setValueDiscount(inputValue);
+  }
+
   const handleAddProduct = (e) => {
     if (selectedProduct !== 'unselected') {
       const newProduct = {
         name: selectedProduct,
-        quantity: qty, // You can start with a default quantity of 1
+        quantity: qty,
+        subtotal: parseFloat(subTotal), // Convertir a número
       };
       setSelectedProductsList([...selectedProductsList, newProduct]);
       setQty('');
       setSelectedProduct('unselected');
       setPrice('');
       setIsDisabled(true);
-      setSubTotal('');
-      const newTotal = parseInt(total + subTotal);
+      const newTotal = total + parseFloat(subTotal); // Convertir a número
       setTotal(newTotal);
+      setSubTotal(0); // Establecer subtotal a 0
     }
   };
 
@@ -218,7 +227,7 @@ export const NotaVenta = () => {
               <Form.Control
                 type="text"
                 disabled
-                value={price.toLocaleString()}
+                value={price}
               />
             </Form.Group>
           </Col>
@@ -271,7 +280,10 @@ export const NotaVenta = () => {
           <Col>
             <Form.Group className="mb-3 ">
               <Form.Label>Descuento</Form.Label>
-              <Form.Control type="text" />
+              <Form.Control
+                type="text"
+                value={valueDiscount}
+                onChange={handleSetDiscount} />
             </Form.Group>
           </Col>
 
@@ -279,9 +291,10 @@ export const NotaVenta = () => {
             <Form.Group className="mb-3 ">
               <Form.Label>Tipo de Descuento</Form.Label>
               <Form.Select aria-label="Default select example">
-                <option defaultValue value="percent">
-                  %
+                <option disabled defaultValue value="percent">
+                  Seleccione tipo de descuento
                 </option>
+                <option value="percent">%</option>
                 <option value="clp">$</option>
               </Form.Select>
             </Form.Group>
@@ -291,7 +304,7 @@ export const NotaVenta = () => {
             <Form.Group className="mb-3 ">
               <Form.Label>Total</Form.Label>
               <Form.Control
-                value={total.toLocaleString()}
+                value={total}
                 disabled
                 type="text"
               />
