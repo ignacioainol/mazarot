@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Carousel } from 'react-bootstrap'
 import { ItemCarousel } from '../components/ItemCarousel'
 import { Button } from 'react-bootstrap';
@@ -6,6 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import './Lubricants.css'
 
 export const Luubricants = () => {
+
+    useEffect(() => {
+        document.title = 'Lubricantes | Mazarot';
+    }, [])
 
     const navigate = useNavigate();
 

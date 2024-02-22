@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Carousel } from 'react-bootstrap'
 import { ItemCarousel } from '../components/ItemCarousel'
 
 
 export const HomeScreen = () => {
+
+    useEffect(() => {
+        document.title = 'Home | Mazarot';
+    }, [])
     return (
         <>
             <Carousel>

@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, Form } from 'react-bootstrap'
 
 export const Contact = () => {
+
+    useEffect(() => {
+        document.title = 'Contacto | Mazarot';
+    }, []);
     return (
         <>
             <Form className='small-form'>

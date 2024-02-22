@@ -38,6 +38,7 @@ export const NotaVenta = () => {
   };
 
   const handleSetDiscount = (e) => {
+    console.log(e)
     let inputValue = e.target.value;
     inputValue = inputValue.replace(/\D/g, '');
     setValueDiscount(inputValue);
@@ -60,6 +61,28 @@ export const NotaVenta = () => {
       setSubTotal(0); // Establecer subtotal a 0
     }
   };
+
+  const handleCheckValueDiscount = (e) => {
+    console.log(e.target.value)
+  }
+
+  const handleTypeDiscount = (e) => {
+    const discountType = e.target.value;
+
+    if (discountType === 'percent') {
+      // Calcular el descuento en porcentaje
+      const percentDiscount = (parseFloat(valueDiscount) / 100) * total;
+      const newTotal = total - percentDiscount;
+      setTotal(Math.floor(newTotal));
+    }
+
+    if (discountType === 'clp') {
+      // Calcular el descuento en cantidad fija
+      const clpDiscount = parseFloat(valueDiscount);
+      const newTotal = total - clpDiscount;
+      setTotal(Math.floor(newTotal));
+    }
+  }
 
   const handleChangeQty = (e) => {
     const priceCleaned = price.replace(',', '');
@@ -281,8 +304,10 @@ export const NotaVenta = () => {
             <Form.Group className="mb-3 ">
               <Form.Label>Descuento</Form.Label>
               <Form.Control
+                disabled={total === 0 ? true : false}
                 type="text"
                 value={valueDiscount}
+                onClick={handleCheckValueDiscount}
                 onChange={handleSetDiscount} />
             </Form.Group>
           </Col>
@@ -290,10 +315,11 @@ export const NotaVenta = () => {
           <Col>
             <Form.Group className="mb-3 ">
               <Form.Label>Tipo de Descuento</Form.Label>
-              <Form.Select aria-label="Default select example">
-                <option disabled defaultValue value="percent">
-                  Seleccione tipo de descuento
-                </option>
+              <Form.Select
+                disabled={(valueDiscount === 0 || valueDiscount === '') ? true : false}
+                onChange={handleTypeDiscount}
+                defaultValue="" aria-label="Default select example">
+                <option value="" disabled>Seleccione...</option>
                 <option value="percent">%</option>
                 <option value="clp">$</option>
               </Form.Select>
