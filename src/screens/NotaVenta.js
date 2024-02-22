@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 
 export const NotaVenta = () => {
+
+  useEffect(() => {
+    document.title = 'Nota Venta | Mazarot';
+  }, [])
+
   const [showContent, setShowContent] = useState(false);
   const [fantasyName, setFantasyName] = useState('');
   const [selectedGestor, setSelectedGestor] = useState('1');
@@ -12,6 +17,7 @@ export const NotaVenta = () => {
   const [qty, setQty] = useState('');
   const [subTotal, setSubTotal] = useState(0);
   const [valueDiscount, setValueDiscount] = useState(0);
+  const [paymentMethod, setPaymentMethod] = useState();
 
   const [selectedProduct, setSelectedProduct] = useState('unselected');
 
@@ -70,18 +76,20 @@ export const NotaVenta = () => {
     const discountType = e.target.value;
 
     if (discountType === 'percent') {
-      // Calcular el descuento en porcentaje
       const percentDiscount = (parseFloat(valueDiscount) / 100) * total;
       const newTotal = total - percentDiscount;
       setTotal(Math.floor(newTotal));
     }
 
     if (discountType === 'clp') {
-      // Calcular el descuento en cantidad fija
       const clpDiscount = parseFloat(valueDiscount);
       const newTotal = total - clpDiscount;
       setTotal(Math.floor(newTotal));
     }
+  }
+
+  const handlePaymentMethod = (e) => {
+    setPaymentMethod(e.target.value);
   }
 
   const handleChangeQty = (e) => {
@@ -192,7 +200,7 @@ export const NotaVenta = () => {
         </Form.Group>
 
         <Row>
-          <Col>
+          <Col sm={6} md={3}>
             <Form.Group>
               <Form.Label>Productos</Form.Label>
               <Form.Select
@@ -244,7 +252,7 @@ export const NotaVenta = () => {
               </Form.Select>
             </Form.Group>
           </Col>
-          <Col>
+          <Col sm={6} md={3}>
             <Form.Group>
               <Form.Label>Precio</Form.Label>
               <Form.Control
@@ -255,7 +263,7 @@ export const NotaVenta = () => {
             </Form.Group>
           </Col>
 
-          <Col>
+          <Col sm={6} md={2}>
             <Form.Group>
               <Form.Label>Cantidad</Form.Label>
               <Form.Control
@@ -268,14 +276,14 @@ export const NotaVenta = () => {
             </Form.Group>
           </Col>
 
-          <Col>
+          <Col sm={6} md={2}>
             <Form.Group>
               <Form.Label>Sub Total</Form.Label>
               <Form.Control disabled value={subTotal} type="text" />
             </Form.Group>
           </Col>
 
-          <Col>
+          <Col sm={12} md={2}>
             <Button onClick={handleAddProduct} style={{ marginTop: '2em' }}>
               Agregar Producto
             </Button>
@@ -342,12 +350,12 @@ export const NotaVenta = () => {
           <Col>
             <Form.Group className="mb-3">
               <Form.Label>Forma de Pago</Form.Label>
-              {/* <Form.Select>
-                                <option>Contado</option>
-                                <option>Crédito 30 días</option>
-                                <option>Transferencia</option>
-                                <option>Transbank</option>
-                            </Form.Select> */}
+              <Form.Select onChange={handlePaymentMethod}>
+                <option>Contado</option>
+                <option>Crédito 30 días</option>
+                <option>Transferencia</option>
+                <option>Transbank</option>
+              </Form.Select>
             </Form.Group>
           </Col>
 
