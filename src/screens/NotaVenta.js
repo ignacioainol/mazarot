@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import ReCAPTCHA from "react-google-recaptcha";
+import axios from 'axios';
 
 export const NotaVenta = () => {
 
   useEffect(() => {
-    document.title = 'Nota Venta | Mazarot';
+    document.title = process.env.REACT_APP_SITE_KEY_DEV;
   }, [])
 
   const [showContent, setShowContent] = useState(false);
@@ -18,6 +20,7 @@ export const NotaVenta = () => {
   const [subTotal, setSubTotal] = useState(0);
   const [valueDiscount, setValueDiscount] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState();
+  const [captchaValue, setCaptchaValue] = useState(null);
 
   const [selectedProduct, setSelectedProduct] = useState('unselected');
 
@@ -100,26 +103,30 @@ export const NotaVenta = () => {
     console.log(selectedProductsList.length);
   };
 
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    let gestorName = '';
-    switch (selectedGestor) {
-      case '1':
-        gestorName = 'Ana María Figueroa';
-        break;
-      case '2':
-        gestorName = 'Nataly V. Pacheco R.';
-        break;
-      case '3':
-        gestorName = 'Nelson R. Chaparro M.';
-        break;
-      default:
-        break;
-    }
+    const response = await axios.post('https://www.mazarot.cl/backend/sendEmail.php');
+    console.log(response);
 
-    console.log('Nombre del gestor:', gestorName);
-    console.log('Nombre fantasy:', fantasyName);
+    // let gestorName = '';
+    // switch (selectedGestor) {
+    //   case '1':
+    //     gestorName = 'Ana María Figueroa';
+    //     break;
+    //   case '2':
+    //     gestorName = 'Nataly V. Pacheco R.';
+    //     break;
+    //   case '3':
+    //     gestorName = 'Nelson R. Chaparro M.';
+    //     break;
+    //   default:
+    //     break;
+    // }
+
+    // console.log('Nombre del gestor:', gestorName);
+    // console.log('Nombre fantasy:', fantasyName);
   };
 
   return (
@@ -366,7 +373,15 @@ export const NotaVenta = () => {
             </Form.Group>
           </Col>
         </Row>
-        <Button variant="primary" type="submit">
+
+        <ReCAPTCHA
+          sitekey={process.env.REACT_APP_SITE_KEY_DEV}
+          onChange={(val) => setCaptchaValue(val)}
+        />
+        <Button
+          disabled={!captchaValue}
+          variant="primary"
+          type="submit">
           Enviar
         </Button>
       </Form>
