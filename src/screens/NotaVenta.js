@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import ReCAPTCHA from "react-google-recaptcha";
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export const NotaVenta = () => {
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    document.title = process.env.REACT_APP_SITE_KEY_DEV;
+    document.title = 'Nota de Venta | Mazarot';
   }, [])
 
   const [showContent, setShowContent] = useState(false);
@@ -19,11 +21,73 @@ export const NotaVenta = () => {
   const [qty, setQty] = useState('');
   const [subTotal, setSubTotal] = useState(0);
   const [valueDiscount, setValueDiscount] = useState(0);
-  const [paymentMethod, setPaymentMethod] = useState();
-  const [captchaValue, setCaptchaValue] = useState(null);
-
+  const [paymentMethod, setPaymentMethod] = useState(null);
+  const [paymentDate, setPaymentDate] = useState('');
+  // const [isClient, setIsClient] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState('unselected');
+  const [rut, setRut] = useState('');
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [email, setEmail] = useState('');
+  const [contactPerson, setContactPerson] = useState('');
 
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    let gestorName = '';
+    switch (selectedGestor) {
+      case '1':
+        gestorName = 'Ana María Figueroa';
+        break;
+      case '2':
+        gestorName = 'Nataly V. Pacheco R.';
+        break;
+      case '3':
+        gestorName = 'Nelson R. Chaparro M.';
+        break;
+      default:
+        break;
+    }
+
+    let formData;
+    if (showContent) {
+      formData = {
+        isGuest: true,
+        rut,
+        email,
+        contactPerson,
+        address,
+        city,
+        fantasyName,
+        gestorName,
+        selectedProductsList,
+        total,
+        paymentMethod,
+        paymentDate
+      };
+    } else {
+      formData = {
+        fantasyName,
+        gestorName,
+        selectedProductsList,
+        total,
+        paymentMethod,
+        paymentDate
+      };
+    }
+
+    // const response = await axios.post('https://www.mazarot.cl/backend/sendEmail.php');
+    const response = await axios.post('https://mazarot.cl/backend/sendEmailTemp.php', formData);
+    if (response.data === 'success') {
+      alert("Nota de Venta enviada");
+      navigate('/');
+    }
+  };
+
+  const handlePaymentDate = (e) => {
+    setPaymentDate(e.target.value);
+  }
   const handleRadioChange = (e) => {
     setShowContent(e.target.value === 'yes');
   };
@@ -103,32 +167,6 @@ export const NotaVenta = () => {
     console.log(selectedProductsList.length);
   };
 
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const response = await axios.post('https://www.mazarot.cl/backend/sendEmail.php');
-    console.log(response);
-
-    // let gestorName = '';
-    // switch (selectedGestor) {
-    //   case '1':
-    //     gestorName = 'Ana María Figueroa';
-    //     break;
-    //   case '2':
-    //     gestorName = 'Nataly V. Pacheco R.';
-    //     break;
-    //   case '3':
-    //     gestorName = 'Nelson R. Chaparro M.';
-    //     break;
-    //   default:
-    //     break;
-    // }
-
-    // console.log('Nombre del gestor:', gestorName);
-    // console.log('Nombre fantasy:', fantasyName);
-  };
-
   return (
     <Container>
       <Form className="small-form" onSubmit={handleSubmit}>
@@ -169,27 +207,46 @@ export const NotaVenta = () => {
 
             <Form.Group className="mb-3 ">
               <Form.Label>Rut</Form.Label>
-              <Form.Control type="text" name="rut" />
+              <Form.Control
+                value={rut}
+                onChange={(e) => setRut(e.target.value)}
+                type="text" name="rut" />
             </Form.Group>
 
             <Form.Group className="mb-3 ">
               <Form.Label>Dirección</Form.Label>
-              <Form.Control type="text" name="direction" />
+              <Form.Control
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                type="text"
+                name="address" />
             </Form.Group>
 
             <Form.Group className="mb-3 ">
               <Form.Label>Ciudad</Form.Label>
-              <Form.Control type="text" name="city" />
+              <Form.Control
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                type="text"
+                name="city" />
             </Form.Group>
 
             <Form.Group className="mb-3 ">
               <Form.Label>Correo</Form.Label>
-              <Form.Control type="text" name="email" />
+              <Form.Control
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="text"
+                name="email" />
             </Form.Group>
 
             <Form.Group className="mb-3 ">
               <Form.Label>Persona de Contacto</Form.Label>
-              <Form.Control type="text" name="contactPerson" />
+              <Form.Control
+                value={contactPerson}
+                onChange={(e) => setContactPerson(e.target.value)}
+                type="text"
+                name="contactPerson" />
             </Form.Group>
           </>
         )}
@@ -369,17 +426,15 @@ export const NotaVenta = () => {
           <Col>
             <Form.Group className="mb-3">
               <Form.Label>Fecha de Pago</Form.Label>
-              <Form.Control type="date" />
+              <Form.Control
+                onChange={handlePaymentDate}
+                value={paymentDate}
+                type="date" />
             </Form.Group>
           </Col>
         </Row>
 
-        <ReCAPTCHA
-          sitekey={process.env.REACT_APP_SITE_KEY_DEV}
-          onChange={(val) => setCaptchaValue(val)}
-        />
         <Button
-          disabled={!captchaValue}
           variant="primary"
           type="submit">
           Enviar
