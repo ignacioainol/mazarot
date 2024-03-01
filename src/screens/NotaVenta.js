@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2'
 import axios from 'axios';
 
 export const NotaVenta = () => {
@@ -13,7 +14,7 @@ export const NotaVenta = () => {
 
   const [showContent, setShowContent] = useState(false);
   const [fantasyName, setFantasyName] = useState('');
-  const [selectedGestor, setSelectedGestor] = useState('1');
+  const [selectedGestor, setSelectedGestor] = useState('unselected');
   const [price, setPrice] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const [total, setTotal] = useState(0);
@@ -23,7 +24,7 @@ export const NotaVenta = () => {
   const [valueDiscount, setValueDiscount] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [paymentDate, setPaymentDate] = useState('');
-  // const [isClient, setIsClient] = useState(true);
+  const [comments, setComments] = useState('');
   const [selectedProduct, setSelectedProduct] = useState('unselected');
   const [rut, setRut] = useState('');
   const [address, setAddress] = useState('');
@@ -38,52 +39,61 @@ export const NotaVenta = () => {
     let gestorName = '';
     switch (selectedGestor) {
       case '1':
-        gestorName = 'Ana María Figueroa';
+        gestorName = 'Gestor 1';
         break;
       case '2':
-        gestorName = 'Nataly V. Pacheco R.';
+        gestorName = 'Gestor 2';
         break;
       case '3':
+        gestorName = 'Ana María Figueroa';
+        break;
+      case '4':
+        gestorName = 'Nataly V. Pacheco R.';
+        break;
+      case '5':
         gestorName = 'Nelson R. Chaparro M.';
         break;
       default:
         break;
     }
 
-    let formData;
+    let formData = {
+      fantasyName,
+      gestorName,
+      selectedProductsList,
+      total,
+      paymentMethod,
+      paymentDate,
+      comments
+    };
+
     if (showContent) {
       formData = {
+        ...formData,
         isGuest: true,
         rut,
         email,
         contactPerson,
         address,
-        city,
-        fantasyName,
-        gestorName,
-        selectedProductsList,
-        total,
-        paymentMethod,
-        paymentDate
-      };
-    } else {
-      formData = {
-        fantasyName,
-        gestorName,
-        selectedProductsList,
-        total,
-        paymentMethod,
-        paymentDate
+        city
       };
     }
 
-    // const response = await axios.post('https://www.mazarot.cl/backend/sendEmail.php');
     const response = await axios.post('https://mazarot.cl/backend/sendEmailTemp.php', formData);
     if (response.data === 'success') {
-      alert("Nota de Venta enviada");
-      navigate('/');
+      swalEmailSuccess()
     }
   };
+
+  const swalEmailSuccess = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Wuuhu !!",
+      text: "Correo enviado satisfactoriamente"
+    }).then(() => {
+      navigate('/');
+    })
+  }
 
   const handlePaymentDate = (e) => {
     setPaymentDate(e.target.value);
@@ -110,8 +120,11 @@ export const NotaVenta = () => {
     setIsDisabled(e.target.value === 'unselected' ? true : false);
   };
 
+  const handleComment = (e) => {
+    setComments(e.target.value);
+  }
+
   const handleSetDiscount = (e) => {
-    console.log(e)
     let inputValue = e.target.value;
     inputValue = inputValue.replace(/\D/g, '');
     setValueDiscount(inputValue);
@@ -199,7 +212,7 @@ export const NotaVenta = () => {
         </Form.Group>
 
         {showContent && (
-          <>
+          <div className="animate__animated animate__bounceInDown">
             <Form.Group className="mb-3 ">
               <Form.Label>Razon Social</Form.Label>
               <Form.Control type="text" name="socialReason" />
@@ -248,7 +261,7 @@ export const NotaVenta = () => {
                 type="text"
                 name="contactPerson" />
             </Form.Group>
-          </>
+          </div>
         )}
 
         <Form.Group className="mb-3">
@@ -257,9 +270,14 @@ export const NotaVenta = () => {
             value={selectedGestor}
             onChange={handleSelectGestorChange}
           >
-            <option value="1">Ana María Figueroa</option>
-            <option value="2">Nataly V. Pacheco R.</option>
-            <option value="3">Nelson R. Chaparro M.</option>
+            <option value="unselected" disabled>
+              Seleccione Gestor ...
+            </option>
+            <option value="1">Gestor 1</option>
+            <option value="2">Gestor 2</option>
+            <option value="3">Ana María Figueroa</option>
+            <option value="4">Nataly V. Pacheco R.</option>
+            <option value="5">Nelson R. Chaparro M.</option>
           </Form.Select>
         </Form.Group>
 
@@ -373,6 +391,20 @@ export const NotaVenta = () => {
 
         <Row>
           <Col>
+            <Form.Group
+              className="mb-3 mt-3"
+              controlId="exampleForm.ControlTextarea1"
+            >
+              <Form.Label>Comentarios</Form.Label>
+              <Form.Control
+                as="textarea"
+                value={comments}
+                onChange={handleComment}
+                rows={3}
+              />
+            </Form.Group>
+          </Col>
+          {/* <Col>
             <Form.Group className="mb-3 ">
               <Form.Label>Descuento</Form.Label>
               <Form.Control
@@ -396,10 +428,10 @@ export const NotaVenta = () => {
                 <option value="clp">$</option>
               </Form.Select>
             </Form.Group>
-          </Col>
+          </Col> */}
 
           <Col>
-            <Form.Group className="mb-3 ">
+            <Form.Group className="mb-3 mt-5">
               <Form.Label>Total</Form.Label>
               <Form.Control
                 value={total}
